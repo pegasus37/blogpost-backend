@@ -7,7 +7,7 @@ How to run locally
 ------------------
 With Docker
 ^^^^^^^^^^^
-Run with docker-compose:
+Run with `docker-compose`::
 
     $ docker-compose -f local.yml up -d
 
