@@ -9,7 +9,7 @@ With Docker
 ^^^^^^^^^^^ 
 Run with `docker-compose`::
 
-    $ docker-compose -f local.yml up -d
+    .
 
 Without Docker
 ^^^^^^^^^^^^^^
