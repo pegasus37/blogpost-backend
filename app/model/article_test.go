@@ -8,11 +8,9 @@ import (
 )
 
 func TestArticleModel(t *testing.T) {
-	var article model.Article
+	article := model.NewArticle()
 
 	t.Run("test_new_article", func(t *testing.T) {
-		article = model.NewArticle()
-
 		assert.NotNil(t, article, "article should not be nil")
 	})
 }

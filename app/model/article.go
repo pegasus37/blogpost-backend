@@ -11,3 +11,7 @@ type Article struct {
 	updatedAt int64
 	updatedBy string
 }
+
+func NewArticle() *Article {
+	return &Article{}
+}
