@@ -10,3 +10,10 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
+Gopkg.lock
+vendor/
+.virtualgo
+.vscode/*
+.idea/*
+.env/
