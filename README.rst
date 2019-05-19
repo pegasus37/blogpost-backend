@@ -20,3 +20,8 @@ Set neccessary environment variables::
 Start server::
 
     .
+
+Run Tests and Coverage
+------------------
+go test ./... -coverprofile=coverage.out
+go tool cover -html=coverage.out
