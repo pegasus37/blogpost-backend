@@ -1,5 +1,9 @@
 package config
 
+import (
+	"github.com/spf13/viper"
+)
+
 type Configuration struct {
 	DB *DBConfig
 }
@@ -13,15 +17,34 @@ type DBConfig struct {
 	Driver       string
 }
 
+func setUpEnv() {
+	viper.SetEnvPrefix("PEGASUS_37")
+	viper.AutomaticEnv()
+
+	viper.BindEnv("PEGASUS_37_API_PORT", "SERVER_PORT")
+
+	viper.BindEnv("PEGASUS_37_DB_HOST", "DB_HOST")
+	viper.BindEnv("PEGASUS_37_DB_PORT", "DB_PORT")
+	viper.BindEnv("PEGASUS_37_DB_USERNAME", "DB_USERNAME")
+	viper.BindEnv("PEGASUS_37_DB_PASSWORD", "DB_PASSWORD")
+	viper.BindEnv("PEGASUS_37_DB_NAME", "DB_NAME")
+	viper.BindEnv("PEGASUS_37_DB_DRIVER", "DB_DRIVER")
+}
+
 func GetConfig() *Configuration {
+
+	setUpEnv()
+
+	DBConfig := &DBConfig{
+		Host:         viper.GetString("PEGASUS_37_DB_HOST"),
+		Port:         viper.GetInt("PEGASUS_37_DB_PORT"),
+		Username:     viper.GetString("PEGASUS_37_DB_USERNAME"),
+		Password:     viper.GetString("PEGASUS_37_DB_PASSWORD"),
+		DatabaseName: viper.GetString("PEGASUS_37_DB_NAME"),
+		Driver:       viper.GetString("PEGASUS_37_DB_DRIVER"),
+	}
+
 	return &Configuration{
-		DB: &DBConfig{
-			Host:         "35.240.204.148",
-			Port:         5432,
-			Username:     "pegasus37",
-			Password:     "PegasuSt33ga7",
-			DatabaseName: "pegasus37",
-			Driver:       "postgres",
-		},
+		DB: DBConfig,
 	}
 }
