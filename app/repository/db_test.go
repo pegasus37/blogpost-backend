@@ -1,6 +1,8 @@
 package repository_test
 
 import (
+	"os"
+	"strconv"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -11,34 +13,19 @@ import (
 
 func TestSetUpDBConnection(t *testing.T) {
 	t.Run("positive", func(t *testing.T) {
+		db_port, _ := strconv.Atoi(os.Getenv("DB_PORT"))
 		config := &config.Configuration{
 			DB: &config.DBConfig{
-				Host:         "35.240.204.148",
-				Port:         5432,
-				Username:     "pegasus37",
-				Password:     "PegasuSt33ga7",
-				DatabaseName: "pegasus37",
-				Driver:       "postgres",
+				Host:         os.Getenv("DB_HOST"),
+				Port:         db_port,
+				Username:     os.Getenv("DB_USERNAME"),
+				Password:     os.Getenv("DB_PASSWORD"),
+				DatabaseName: os.Getenv("DB_NAME"),
+				Driver:       os.Getenv("DB_DRIVER"),
 			},
 		}
 
 		DbHandler := repository.SetUpDBConnection(config)
 		assert.NotNil(t, DbHandler)
-	})
-
-	t.Run("negative", func(t *testing.T) {
-		config := &config.Configuration{
-			DB: &config.DBConfig{
-				Host:         "",
-				Port:         0,
-				Username:     "",
-				Password:     "",
-				DatabaseName: "",
-				Driver:       "mysql",
-			},
-		}
-
-		DbHandler := repository.SetUpDBConnection(config)
-		assert.Nil(t, DbHandler)
 	})
 }

@@ -22,6 +22,7 @@ type DBHandler struct {
 
 func SetUpDBConnection(config *config.Configuration) *DBHandler {
 	dbConf := config.DB
+
 	user := dbConf.Username
 	pass := dbConf.Password
 	host := dbConf.Host
@@ -35,11 +36,10 @@ func SetUpDBConnection(config *config.Configuration) *DBHandler {
 		log.Fatalf("Error connecting to database: %v", err)
 		return nil
 	}
+
 	db.SetMaxOpenConns(MaxOpenConnection)
 
-	dbHandler := &DBHandler{
+	return &DBHandler{
 		Db: db,
 	}
-
-	return dbHandler
 }
