@@ -5,7 +5,8 @@ import (
 )
 
 type Configuration struct {
-	DB *DBConfig
+	HTTP_PORT string
+	DB        *DBConfig
 }
 
 type DBConfig struct {
@@ -45,6 +46,7 @@ func GetConfig() *Configuration {
 	}
 
 	return &Configuration{
-		DB: DBConfig,
+		HTTP_PORT: viper.GetString("PEGASUS_37_API_PORT"),
+		DB:        DBConfig,
 	}
 }
